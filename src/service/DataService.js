@@ -5,5 +5,4 @@ export class DataService {
         return fetch('data/stock.json').then(res => res.json()).then(d => d.data);
     }
 
-
 }
