@@ -5,12 +5,8 @@ import {Column} from 'primereact/column';
 import {DataService} from './service/DataService';
 import {Toast} from 'primereact/toast';
 import {Button} from 'primereact/button';
-// import {FileUpload} from 'primereact/fileupload';
-// import {Rating} from 'primereact/rating';
 import {Toolbar} from 'primereact/toolbar';
-// import {InputTextarea} from 'primereact/inputtextarea';
 import {Dropdown} from 'primereact/dropdown';
-// import {RadioButton} from 'primereact/radiobutton';
 import {InputNumber} from 'primereact/inputnumber';
 import {Dialog} from 'primereact/dialog';
 import {InputText} from 'primereact/inputtext';
@@ -40,10 +36,7 @@ const DTK = () => {
     ];
 
     const [stocks, setStocks] = useState([]);
-    // const [confidence, setConfidence] = useState(null);
-    // const [ratio, setRatio] = useState(null);
-    // const [asset_allocation, setAssetAllocation] = useState(null);
-    // const [roi, setRoi] = useState(null);
+
     const [inputMoney, setInputMoney] = useState(null);
 
     const [stockDialog, setStockDialog] = useState(false);
@@ -199,70 +192,10 @@ const DTK = () => {
         }
         return id;
     }
-    //
-    // const importCSV = (e) => {
-    //     const file = e.files[0];
-    //     const reader = new FileReader();
-    //     reader.onload = (e) => {
-    //         const csv = e.target.result;
-    //         const data = csv.split('\n');
-    //
-    //         // Prepare DataTable
-    //         const cols = data[0].replace(/['"]+/g, '').split(',');
-    //         data.shift();
-    //
-    //         const importedData = data.map(d => {
-    //             d = d.split(',');
-    //             const processedData = cols.reduce((obj, c, i) => {
-    //                 obj[c] = d[i].replace(/['"]+/g, '');
-    //                 return obj;
-    //             }, {});
-    //
-    //             processedData['id'] = createId();
-    //             return processedData;
-    //         });
-    //
-    //         const _stocks = [...stocks, ...importedData];
-    //
-    //         setStocks(_stocks);
-    //     };
-    //
-    //     reader.readAsText(file, 'UTF-8');
-    // }
 
     const exportCSV = () => {
         dt.current.exportCSV();
     }
-
-    // const exportExcel = () => {
-    //     import('xlsx').then(xlsx => {
-    //         const worksheet = xlsx.utils.json_to_sheet(products);
-    //         const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    //         const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-    //         saveAsExcelFile(excelBuffer, 'products');
-    //     });
-    // }
-    //
-    // const saveAsExcelFile = (buffer, fileName) => {
-    //     import('file-saver').then(FileSaver => {
-    //         let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-    //         let EXCEL_EXTENSION = '.xlsx';
-    //         const data = new Blob([buffer], {
-    //             type: EXCEL_TYPE
-    //         });
-    //         FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
-    //     });
-    // }
-    //
-    // const exportPdf = () => {
-    //     import('jspdf').then(jsPDF => {
-    //         import('jspdf-autotable').then(() => {
-    //             const doc = new jsPDF.default(0, 0);
-    //             doc.autoTable(exportColumns, products);
-    //             doc.save('products.pdf');
-    //         })
-    //     })
-    // }
 
     const confirmDeleteSelected = () => {
         setDeleteStocksDialog(true);
@@ -402,18 +335,6 @@ const DTK = () => {
         // setStocks(stocks_obj); //通知react渲染全部UI
     }
 
-    // const onWinChange = (e) => {
-    //     let _stock = {...stock};
-    //     _stock['win'] = e.value;
-    //     setStock(_stock);
-    // }
-
-    // const onCategoryChange = (e) => {
-    //     let _stock = {...stock};
-    //     _stock['category'] = e.value;
-    //     setStock(_stock);
-    // }
-
     const onInputChange = (e, name) => {
         const val = (e.target && e.target.value) || '';
         let _stock = {...stock};
@@ -463,11 +384,7 @@ const DTK = () => {
         )
     }
 
-    // const imageBodyTemplate = (rowData) => {
-    //     return <img src={`showcase/demo/images/product/${rowData.image}`}
-    //                 onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}
-    //                 alt={rowData.image} className="product-image"/>
-    // }
+
 
     const assetAllocationBodyTemplate = (rowData) => {
         return formatPercentWith2Fixed(rowData.asset_allocation);
@@ -477,40 +394,6 @@ const DTK = () => {
         return formatCurrency(rowData.asset_money);
     }
 
-    // const percentBodyTemplate = (rowData) => {
-    //     // if (rowData.confidence) {
-    //     //     return formatPercent(rowData.confidence);
-    //     // } else if (rowData.ratio) {
-    //     //     return formatPercent(rowData.win);
-    //     // } else if (rowData.win) {
-    //     //     return formatPercent(rowData.loss);
-    //     // } else if (rowData.loss) {
-    //     //     return formatPercent(rowData.loss);
-    //     // }
-    //
-    //     // rowData.map(i => {
-    //     //     return formatPercent(rowData[i])
-    //     // });
-    //
-    // }
-
-    // const confidenceBodyTemplate = (option, props) => {
-    //     console.log(option, props)
-    //     // if (option) {
-    //     //     return (
-    //     //         <div className="country-item country-item-value">
-    //     //             <img alt={option.label} src="images/flag/flag_placeholder.png" className={`flag flag-${option.value.toLowerCase()}`} />
-    //     //             <div>{option.label}</div>
-    //     //         </div>
-    //     //     );
-    //     // }
-    //     //
-    //     // return (
-    //     //     <span>
-    //     //     {props.placeholder}
-    //     // </span>
-    //     // );
-    // }
     const confidenceBodyTemplate = (rowData) => {
         return formatPercent(rowData.confidence);
     }
@@ -530,19 +413,6 @@ const DTK = () => {
     const roiBodyTemplate = (rowData) => {
         return formatPercentWith2Fixed(rowData.roi);
     }
-
-    // const confirmTemplate = (show_string) => {
-    //     return (
-    //         <Dialog visible={deleteStockDialog} className="dialog-width" header="Confirm" modal
-    //                 footer={deleteStockDialogFooter} onHide={hideDeleteStockDialog}>
-    //             <div className="confirmation-content">
-    //                 <i className="pi pi-exclamation-triangle p-mr-3" style={{fontSize: '2rem'}}/>
-    //                 {stock && <span>Are you sure you want to delete <b>{stock.code}</b>?</span>}
-    //             </div>
-    //         </Dialog>
-    //     );
-    // }
-
 
     const actionBodyTemplate = (rowData) => {
         return (
@@ -632,36 +502,23 @@ const DTK = () => {
 
                     <Column field="asset_money" header="建議配置金額" sortable body={assetMoneyBodyTemplate}
                             className="datatable-column"></Column>
-                    {/*<Column field="category" header="Category" sortable style={{minWidth: '10rem'}}></Column>*/}
-                    {/*<Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable*/}
-                    {/*        style={{minWidth: '12rem'}}></Column>*/}
-                    {/*<Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable*/}
-                    {/*        style={{minWidth: '12rem'}}></Column>*/}
+
                     <Column body={actionBodyTemplate} exportable={false} className="datatable-column"></Column>
                 </DataTable>
             </div>
 
             <Dialog visible={stockDialog} header="Stock Details" modal className={["p-fluid", "dialog-width"]}
                     footer={stockDialogFooter} onHide={hideDialog}>
-                {/*{stock.image && <img src={`showcase/demo/images/product/${stock.image}`}*/}
-                {/*                       onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}*/}
-                {/*                       alt={stock.image} className="product-image p-d-block p-m-auto p-pb-3"/>}*/}
+
                 <div className="p-field">
                     <label htmlFor="code">股票代號</label>
                     <InputText id="code" value={stock.code || ''} onChange={(e) => onInputChange(e, 'code')} required
                                autoFocus className={classNames({'p-invalid': submitted && !stock.code})}/>
                     {!stock.code && <small className="p-error">Code is required</small>}
 
-                    {/*<label htmlFor="name">Name</label>*/}
-                    {/*<InputText id="name" value={stock.name} onChange={(e) => onInputChange(e, 'name')} required*/}
-                    {/*           autoFocus className={classNames({'p-invalid': submitted && !stock.name})}/>*/}
-                    {/*{submitted && !stock.name && <small className="p-error">Name is required.</small>}*/}
+
                 </div>
-                {/*<div className="p-field">*/}
-                {/*    <label htmlFor="description">Description</label>*/}
-                {/*    <InputTextarea id="description" value={stock.description}*/}
-                {/*                   onChange={(e) => onInputChange(e, 'description')} required rows={3} cols={20}/>*/}
-                {/*</div>*/}
+
                 <div className="p-field">
                     <label htmlFor="confidence">信心度(%)</label>
                     <Dropdown value={stock.confidence} options={confidenceSelectItems} optionLabel='label'
@@ -673,31 +530,6 @@ const DTK = () => {
                     {/*{!stock.confidence && <small className="p-error">Confidence is required.</small>}*/}
                 </div>
 
-                {/*<div className="p-field">*/}
-                {/*    <label className="p-mb-3">Category</label>*/}
-                {/*    <div className="p-formgrid p-grid">*/}
-                {/*        <div className="p-field-radiobutton p-col-6">*/}
-                {/*            <RadioButton inputId="category1" name="category" value="Accessories"*/}
-                {/*                         onChange={onCategoryChange} checked={stock.category === 'Accessories'}/>*/}
-                {/*            <label htmlFor="category1">Accessories</label>*/}
-                {/*        </div>*/}
-                {/*        <div className="p-field-radiobutton p-col-6">*/}
-                {/*            <RadioButton inputId="category2" name="category" value="Clothing"*/}
-                {/*                         onChange={onCategoryChange} checked={stock.category === 'Clothing'}/>*/}
-                {/*            <label htmlFor="category2">Clothing</label>*/}
-                {/*        </div>*/}
-                {/*        <div className="p-field-radiobutton p-col-6">*/}
-                {/*            <RadioButton inputId="category3" name="category" value="Electronics"*/}
-                {/*                         onChange={onCategoryChange} checked={stock.category === 'Electronics'}/>*/}
-                {/*            <label htmlFor="category3">Electronics</label>*/}
-                {/*        </div>*/}
-                {/*        <div className="p-field-radiobutton p-col-6">*/}
-                {/*            <RadioButton inputId="category4" name="category" value="Fitness" onChange={onCategoryChange}*/}
-                {/*                         checked={stock.category === 'Fitness'}/>*/}
-                {/*            <label htmlFor="category4">Fitness</label>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
                 <div className="p-formgrid p-grid">
                     <div className="p-field p-col">
                         <label htmlFor="win">停利(%)</label>
@@ -716,15 +548,6 @@ const DTK = () => {
                 </div>
 
             </Dialog>
-
-            {/*<Dialog visible={deleteStockDialog} className="dialog-width" header="Confirm" modal*/}
-            {/*        footer={deleteStockDialogFooter} onHide={hideDeleteStockDialog}>*/}
-            {/*    <div className="confirmation-content">*/}
-            {/*        <i className="pi pi-exclamation-triangle p-mr-3" style={{fontSize: '2rem'}}/>*/}
-            {/*        {stock && <span>Are you sure you want to delete <b>{stock.code}</b>?</span>}*/}
-            {/*    </div>*/}
-            {/*</Dialog>*/}
-
 
             <Dialog visible={deleteStockDialog} className="dialog-width" header="Confirm" modal
                     footer={deleteStockDialogFooter} onHide={hideDeleteStockDialog}>
