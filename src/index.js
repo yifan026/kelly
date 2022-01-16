@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './asset/css/index.css';
 // import TB from './table';
-import DG from './data-grid';
+import DTK from './data-table-kelly';
 // import App from './App';
 // import Table from './table';
 import reportWebVitals from './reportWebVitals';
@@ -16,7 +16,7 @@ ReactDOM.render(
         <Container maxWidth="xl">
             {/*<TB/>*/}
             {/*<Table sx={{ bgcolor: '#cfe8fc' }} />*/}
-            <DG/>
+            <DTK/>
         </Container>
     </React.Fragment>,
     document.getElementById('root')

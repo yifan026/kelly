@@ -132,6 +132,8 @@ function AddNewRowBtn(props) {
 
 function DataTable(props) {
 
+    const onCellClicked = () => console.log('Cell was clicked');
+
 
     return (
 
@@ -142,11 +144,11 @@ function DataTable(props) {
             rows={props.rows}
             columns={columns}
             hideFooterPagination={true}
-            onChange={props.onChange}
+            onCellValueChange={onCellClicked}
             // rowsPerPageOptions={[5]}
             // isRowSelectable={(params:any) =>params.Records.Status = "success"}
-            disableSelectionOnClick
-            checkboxSelection
+            // disableSelectionOnClick
+            // checkboxSelection
         />
     );
 
@@ -345,8 +347,8 @@ const useStyles = makeStyles({
 const DG = () => {
 
     const classes = useStyles();
-    let [rows, setRows] = useState([]);
-    let [count_no, setCount] = useState(1);
+    let [rows, setRows] = useState([createData(1,2333,20,null,1,2,null,null,null)]);
+    let [count_no, setCount] = useState(2);
     const [moneyText, setMoneyText] = useState(null);
     const [stockNo, setStockNo] = useState('');
     const [confidence, setConfidence] = useState(null);
@@ -356,15 +358,18 @@ const DG = () => {
     const handleAddNewRowClick = () => {
         setCount(count_no + 1);
 
+        // rows = .slice(0, this.state.stepNumber + 1);
+        console.log('b',rows)
+
         let new_rows = [createData(count_no)];
 
         setRows(rows.concat(new_rows));
 
-        console.log(rows)
-
     }
 
     const handleRowsChange = (e) => {
+
+        setRows(e.target.value);
         setStockNo(e.target.value);
         setConfidence(e.target.value);
         setWin(e.target.value);
@@ -377,7 +382,7 @@ const DG = () => {
     }
 
     useEffect(() => {
-        console.log(moneyText,stockNo,confidence,win,loss);
+        console.log(moneyText,rows);
     });
 
     return (
@@ -399,7 +404,7 @@ const DG = () => {
             </Box>
 
             <div style={{height: 500, width: '100%'}} className={classes.root}>
-                <DataTable rows={rows} onChange={handleRowsChange}/>
+                <DataTable rows={rows} />
             </div>
         </div>
     );
